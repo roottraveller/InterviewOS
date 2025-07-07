@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/TechNotes2InterviewOS/static/css/main.c6b8e9f0.css",
+    "main.js": "/TechNotes2InterviewOS/static/js/main.7d084f79.js",
+    "index.html": "/TechNotes2InterviewOS/index.html",
+    "main.c6b8e9f0.css.map": "/TechNotes2InterviewOS/static/css/main.c6b8e9f0.css.map",
+    "main.7d084f79.js.map": "/TechNotes2InterviewOS/static/js/main.7d084f79.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c6b8e9f0.css",
+    "static/js/main.7d084f79.js"
+  ]
+}
