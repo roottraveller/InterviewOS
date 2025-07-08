@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/InterviewOS/static/css/main.cac4d9e1.css",
+    "main.css": "/InterviewOS/static/css/main.34e41dc9.css",
     "main.js": "/InterviewOS/static/js/main.7d084f79.js",
     "index.html": "/InterviewOS/index.html",
-    "main.cac4d9e1.css.map": "/InterviewOS/static/css/main.cac4d9e1.css.map",
+    "main.34e41dc9.css.map": "/InterviewOS/static/css/main.34e41dc9.css.map",
     "main.7d084f79.js.map": "/InterviewOS/static/js/main.7d084f79.js.map"
   },
   "entrypoints": [
-    "static/css/main.cac4d9e1.css",
+    "static/css/main.34e41dc9.css",
     "static/js/main.7d084f79.js"
   ]
 }
