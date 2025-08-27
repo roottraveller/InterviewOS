@@ -15,12 +15,10 @@ export const applicationServer = {
       <li><strong>Runtime environment:</strong> Provides execution context for applications</li>
     </ul>
 
-    <details>
-      <summary><strong>Example: E-commerce Order Processing</strong></summary>
-      <div class="info-note">
-        When you place an order on Amazon, the application server (like WebLogic or JBoss) executes the business logic: validates your payment, checks inventory, calculates shipping, applies discounts, and coordinates with multiple services. The server manages the entire transaction, ensuring all steps complete successfully or roll back if any step fails.
-      </div>
-    </details>
+    <div class="info-note">
+      <strong>Example: E-commerce Order Processing</strong><br>
+      When you place an order on Amazon, the application server (like WebLogic or JBoss) executes the business logic: validates your payment, checks inventory, calculates shipping, applies discounts, and coordinates with multiple services. The server manages the entire transaction, ensuring all steps complete successfully or roll back if any step fails.
+    </div>
 
     <h4>Transaction Management</h4>
     <ul>
@@ -30,12 +28,10 @@ export const applicationServer = {
       <li><strong>Connection pooling:</strong> Optimizes database connections</li>
     </ul>
 
-    <details>
-      <summary><strong>Example: Banking Transaction Processing</strong></summary>
-      <div class="info-note">
-        A bank's application server handles money transfers by managing distributed transactions. When transferring $1000 from Account A to Account B, the server ensures both the debit and credit operations complete successfully. If either fails, the entire transaction rolls back, maintaining data consistency across multiple database systems.
-      </div>
-    </details>
+    <div class="info-note">
+      <strong>Example: Banking Transaction Processing</strong><br>
+      A bank's application server handles money transfers by managing distributed transactions. When transferring $1000 from Account A to Account B, the server ensures both the debit and credit operations complete successfully. If either fails, the entire transaction rolls back, maintaining data consistency across multiple database systems.
+    </div>
 
     <h4>Security & Authentication</h4>
     <ul>
@@ -44,37 +40,6 @@ export const applicationServer = {
       <li><strong>Role-based security:</strong> Manages permissions based on user roles</li>
       <li><strong>SSL/TLS termination:</strong> Handles secure communication</li>
     </ul>
-
-    <div class="code-block">
-      <div class="code-label">ARCHITECTURE</div>
-      <pre><code>// Application Server Architecture
-┌─────────────────────────────────────────────────────┐
-│                Application Server                   │
-│                                                     │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  │
-│  │   Web       │  │  Business   │  │   Data      │  │
-│  │ Container   │  │   Logic     │  │  Access     │  │
-│  │             │  │  Services   │  │   Layer     │  │
-│  └─────────────┘  └─────────────┘  └─────────────┘  │
-│                                                     │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  │
-│  │ Transaction │  │  Security   │  │ Connection  │  │
-│  │  Manager    │  │  Manager    │  │    Pool     │  │
-│  └─────────────┘  └─────────────┘  └─────────────┘  │
-│                                                     │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  │
-│  │   JMS       │  │   JNDI      │  │    EJB      │  │
-│  │ Messaging   │  │  Naming     │  │ Container   │  │
-│  └─────────────┘  └─────────────┘  └─────────────┘  │
-└─────────────────────────────────────────────────────┘
-                          │
-                ┌─────────┼─────────┐
-                │         │         │
-          ┌───────────┐ ┌───────────┐ ┌───────────┐
-          │ Database  │ │   LDAP    │ │ Message   │
-          │  Server   │ │  Server   │ │  Queue    │
-          └───────────┘ └───────────┘ └───────────┘</code></pre>
-    </div>
 
     <h3>Application Server vs Web Server</h3>
     <p>Understanding the distinction between application servers and web servers is crucial for system architecture decisions.</p>
@@ -144,12 +109,10 @@ export const applicationServer = {
       <li><strong>Eclipse Jetty:</strong> Lightweight, embeddable servlet container</li>
     </ul>
 
-    <details>
-      <summary><strong>Example: Netflix's Tomcat Usage</strong></summary>
-      <div class="info-note">
-        Netflix uses thousands of Tomcat instances to serve their streaming platform. Each Tomcat server handles specific microservices like user authentication, recommendation engine, or video metadata. They've optimized Tomcat for their specific needs, running lightweight instances that can be quickly deployed and scaled across their global infrastructure.
-      </div>
-    </details>
+    <div class="info-note">
+      <strong>Example: Netflix's Tomcat Usage</strong><br>
+      Netflix uses thousands of Tomcat instances to serve their streaming platform. Each Tomcat server handles specific microservices like user authentication, recommendation engine, or video metadata. They've optimized Tomcat for their specific needs, running lightweight instances that can be quickly deployed and scaled across their global infrastructure.
+    </div>
 
     <h4>Non-Java Application Servers</h4>
     <ul>
@@ -160,12 +123,10 @@ export const applicationServer = {
       <li><strong>Express.js:</strong> Minimal Node.js web application framework</li>
     </ul>
 
-    <details>
-      <summary><strong>Example: LinkedIn's Node.js Migration</strong></summary>
-      <div class="info-note">
-        LinkedIn migrated their mobile backend from Ruby on Rails to Node.js application servers. This change reduced their server count from 30 to 3 servers while improving performance 20x. Node.js's event-driven architecture was perfect for handling LinkedIn's real-time messaging and notification requirements.
-      </div>
-    </details>
+    <div class="info-note">
+      <strong>Example: LinkedIn's Node.js Migration</strong><br>
+      LinkedIn migrated their mobile backend from Ruby on Rails to Node.js application servers. This change reduced their server count from 30 to 3 servers while improving performance 20x. Node.js's event-driven architecture was perfect for handling LinkedIn's real-time messaging and notification requirements.
+    </div>
 
     <h3>Enterprise Services & Features</h3>
 
@@ -237,12 +198,10 @@ export const applicationServer = {
       <li><strong>Performance tuning:</strong> JVM settings, thread pools, caching</li>
     </ul>
 
-    <details>
-      <summary><strong>Example: Uber's Microservices Architecture</strong></summary>
-      <div class="info-note">
-        Uber runs thousands of microservices on application servers across multiple data centers. Each service runs in its own container with specific resource allocations. Their platform automatically handles deployment, scaling, and failover, allowing them to deploy code changes thousands of times per day while maintaining 99.99% uptime.
-      </div>
-    </details>
+    <div class="info-note">
+      <strong>Example: Uber's Microservices Architecture</strong><br>
+      Uber runs thousands of microservices on application servers across multiple data centers. Each service runs in its own container with specific resource allocations. Their platform automatically handles deployment, scaling, and failover, allowing them to deploy code changes thousands of times per day while maintaining 99.99% uptime.
+    </div>
 
     <h3>Performance & Scalability</h3>
 
@@ -288,12 +247,10 @@ export const applicationServer = {
       <li><strong>Vert.x:</strong> Event-driven application framework</li>
     </ul>
 
-    <details>
-      <summary><strong>Example: Spotify's Microservices Platform</strong></summary>
-      <div class="info-note">
-        Spotify runs over 3,000 microservices on their custom application platform built on Kubernetes. Each service is independently deployable and scalable. Their platform provides automatic service discovery, load balancing, and monitoring, allowing development teams to focus on business logic rather than infrastructure concerns.
-      </div>
-    </details>
+    <div class="info-note">
+      <strong>Example: Spotify's Microservices Platform</strong><br>
+      Spotify runs over 3,000 microservices on their custom application platform built on Kubernetes. Each service is independently deployable and scalable. Their platform provides automatic service discovery, load balancing, and monitoring, allowing development teams to focus on business logic rather than infrastructure concerns.
+    </div>
 
     <h3>Best Practices</h3>
 
@@ -325,8 +282,9 @@ export const applicationServer = {
     </ul>
 
     <div class="reference-links">
-      <h4>References</h4>
+      <h4>Further Reading and References</h4>
       <ul>
+        <li><a href="https://stackoverflow.com/questions/936197/what-is-the-difference-between-application-server-and-web-server" target="_blank">Stack Overflow: What is the difference between application server and web server?</a></li>
         <li><a href="https://docs.oracle.com/javaee/7/tutorial/overview003.htm" target="_blank">Oracle: Java EE Application Servers</a></li>
         <li><a href="https://www.redhat.com/en/topics/middleware/what-is-application-server" target="_blank">Red Hat: What is an Application Server?</a></li>
         <li><a href="https://tomcat.apache.org/tomcat-9.0-doc/architecture-overview.html" target="_blank">Apache Tomcat: Architecture Overview</a></li>
