@@ -2,27 +2,48 @@ export const oauth2 = {
   id: "oauth2",
   title: "OAuth 2.0",
   content: `
-<p>OAuth 2.0 is an authorization framework that enables applications to obtain limited access to user accounts on an HTTP service without exposing user credentials.</p>
+    <p>OAuth 2.0 is an open standard authorization protocol that enables third-party applications to access protected resources on behalf of a resource owner (user) without disclosing the user's credentials. OAuth 2.0 defines a set of roles, grant types, endpoints, and protocols for authentication and authorization.</p>
+
+    <h3>OAuth 2.0 Core Concepts</h3>
+    <p>OAuth 2.0 operates through a well-defined set of roles and components that work together to provide secure authorization.</p>
+
+    <h4>Key Roles</h4>
+    <ul>
+      <li><strong>Resource Owner:</strong> The user who owns the data and grants access</li>
+      <li><strong>Client:</strong> The application requesting access to protected resources</li>
+      <li><strong>Authorization Server:</strong> Authenticates the user and issues tokens</li>
+      <li><strong>Resource Server:</strong> Hosts the protected resources and validates tokens</li>
+    </ul>
 
     <h3>OAuth 2.0 Flow Components</h3>
     
     <h4>Authorization Server</h4>
-    <p>The server that authenticates the user and issues access tokens after getting proper authorization. Examples include Google, Facebook, GitHub authorization servers.</p>
-
-    <h4>Access Token</h4>
-    <p>A credential that represents the authorization to access protected resources. It's typically a string that the client uses to access the resource server.</p>
+    <p>The server that authenticates the resource owner and issues access tokens to the client after obtaining authorization. Before initiating the OAuth flow, the client application (e.g., a web or mobile app) must register (client ID, client secret, client scope or permissions) with the authorization server. Auth server sends 2 tokens: access token and refresh token to client.</p>
     <ul>
+      <li><strong>Client Registration:</strong> Applications must register to get client ID and secret</li>
+      <li><strong>User Authentication:</strong> Handles user login and consent</li>
+      <li><strong>Token Issuance:</strong> Generates and validates access and refresh tokens</li>
+      <li><strong>Scope Management:</strong> Defines and enforces permission scopes</li>
+    </ul>
+
+    <h4>Access Token (Opaque Token)</h4>
+    <p>Access tokens are typically opaque strings or JWT that contain information about the authorization and scope of access granted to the client. It is used by the client to access protected resources on the resource server. Access tokens are short-lived and typically have an expiration time.</p>
+    <ul>
+      <li><strong>Short Lifetime:</strong> Typically 15 minutes to 1 hour</li>
       <li><strong>Scope:</strong> Defines the level of access granted</li>
-      <li><strong>Expiration:</strong> Tokens have limited lifetime for security</li>
       <li><strong>Format:</strong> Can be JWT or opaque string</li>
+      <li><strong>Bearer Token:</strong> Most common token type</li>
+      <li><strong>Stateless:</strong> No server-side storage required</li>
     </ul>
 
     <h4>Refresh Token</h4>
-    <p>A long-lived credential used to obtain new access tokens when the current access token expires, without requiring the user to re-authenticate.</p>
+    <p>Refresh tokens are securely stored by the client application and are used to request new access tokens from the authorization server without requiring the user to re-authenticate. Refresh tokens are long-lived.</p>
     <ul>
       <li><strong>Longer Lifetime:</strong> Typically valid for days, weeks, or months</li>
       <li><strong>Security:</strong> Must be stored securely by the client</li>
       <li><strong>Rotation:</strong> May be rotated when used to obtain new access tokens</li>
+      <li><strong>Revocation:</strong> Can be revoked to invalidate all sessions</li>
+      <li><strong>Limited Scope:</strong> Cannot be used to access resources directly</li>
     </ul>
 
     <h3>OAuth 2.0 Grant Types</h3>
@@ -64,38 +85,68 @@ export const oauth2 = {
       <li><strong>Verification:</strong> Authorization server verifies the code verifier matches the challenge</li>
     </ul>
 
+    <h3>OAuth 2.0 Authorization Flow</h3>
+    <div class="image-container">
+      <img src="/images/oauth2.jpg" alt="OAuth 2.0 Authorization Flow Diagram" class="content-image" />
+      <p class="image-caption">
+        <em>Source: <a href="https://medium.com/@techworldwithmilan/how-does-oauth-2-0-work-bea67a760aa5" target="_blank" rel="noopener noreferrer">Tech World with Milan - How Does OAuth 2.0 Work?</a></em>
+      </p>
+    </div>
+
     <h3>OAuth 2.0 vs OAuth 1.0</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Aspect</th>
-          <th>OAuth 1.0</th>
-          <th>OAuth 2.0</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>Complexity</strong></td>
-          <td>Complex signature requirements</td>
-          <td>Simpler, relies on HTTPS</td>
-        </tr>
-        <tr>
-          <td><strong>Transport Security</strong></td>
-          <td>Built-in signature mechanism</td>
-          <td>Requires HTTPS</td>
-        </tr>
-        <tr>
-          <td><strong>Token Types</strong></td>
-          <td>Single token type</td>
-          <td>Access tokens + refresh tokens</td>
-        </tr>
-        <tr>
-          <td><strong>Mobile Support</strong></td>
-          <td>Poor</td>
-          <td>Better with PKCE</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="comparison-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Aspect</th>
+            <th>OAuth 1.0</th>
+            <th>OAuth 2.0</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Complexity</strong></td>
+            <td>Complex signature requirements</td>
+            <td>Simpler, relies on HTTPS</td>
+          </tr>
+          <tr>
+            <td><strong>Transport Security</strong></td>
+            <td>Built-in signature mechanism</td>
+            <td>Requires HTTPS</td>
+          </tr>
+          <tr>
+            <td><strong>Token Types</strong></td>
+            <td>Single token type</td>
+            <td>Access tokens + refresh tokens</td>
+          </tr>
+          <tr>
+            <td><strong>Mobile Support</strong></td>
+            <td>Poor</td>
+            <td>Better with PKCE</td>
+          </tr>
+          <tr>
+            <td><strong>Implementation</strong></td>
+            <td>Complex cryptographic signatures</td>
+            <td>Simple bearer tokens</td>
+          </tr>
+          <tr>
+            <td><strong>Security Model</strong></td>
+            <td>Request signing</td>
+            <td>Token-based with HTTPS</td>
+          </tr>
+          <tr>
+            <td><strong>Token Lifetime</strong></td>
+            <td>No expiration (manual revocation)</td>
+            <td>Short-lived access tokens</td>
+          </tr>
+          <tr>
+            <td><strong>Scope Support</strong></td>
+            <td>Limited scope granularity</td>
+            <td>Fine-grained scope control</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <h3>Common OAuth 2.0 Scopes</h3>
     <ul>
@@ -107,11 +158,11 @@ export const oauth2 = {
     </ul>
 
     <div class="reference-links">
-      <h4>📚 References</h4>
+      <h4>Further Reading and References</h4>
       <ul>
-        <li><a href="https://tools.ietf.org/html/rfc6749" target="_blank">RFC 6749 - OAuth 2.0 Authorization Framework</a></li>
+        <li><a href="https://blog.bytebytego.com/p/ep72-oauth-20-explained-with-simple" target="_blank">ByteByteGo: OAuth 2.0 Explained with Simple Examples</a></li>
+        <li><a href="https://medium.com/@techworldwithmilan/how-does-oauth-2-0-work-bea67a760aa5" target="_blank">Tech World with Milan: How Does OAuth 2.0 Work?</a></li>
         <li><a href="https://oauth.net/2/" target="_blank">OAuth 2.0 Official Website</a></li>
-        <li><a href="https://tools.ietf.org/html/rfc7636" target="_blank">RFC 7636 - PKCE Extension</a></li>
       </ul>
     </div>
 `

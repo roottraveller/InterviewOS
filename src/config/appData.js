@@ -128,87 +128,21 @@ import { vectorClocks } from '../data/vectorClocks';
 import { verticalVsHorizontalScaling } from '../data/verticalVsHorizontalScaling';
 import { webServer } from '../data/webServer';
 import { websockets as webSockets } from '../data/webSockets';
+import { techAcronyms } from '../data/techAcronyms';
+import { systemDesignHLD } from '../data/systemDesignHLD';
+import { systemDesignLLD } from '../data/systemDesignLLD';
+import { javaQuickReference } from '../data/javaQuickReference';
 
 export const appData = {
   topics: [
     {
-      id: 'full-forms',
-      title: 'Must know Acronyms',
+      id: 'tech-acronyms',
+      title: 'Technology Acronyms',
       subtopics: [
         {
           id: 'tech-acronyms',
           title: 'Technology Acronyms',
-          content: `
-            <h2>Essential Technology Acronyms</h2>
-            <p>A comprehensive list of must-know technology acronyms for technical interviews:</p>
-            
-            <h3>Security & Protocols</h3>
-            <ul>
-              <li><strong>TLS</strong> - Transport Layer Security</li>
-              <li><strong>SSL</strong> - Secure Sockets Layer</li>
-              <li><strong>SMTP</strong> - Simple Mail Transfer Protocol</li>
-              <li><strong>XMPP</strong> - Extensible Messaging and Presence Protocol</li>
-              <li><strong>AMQP</strong> - Advanced Message Queuing Protocol</li>
-              <li><strong>SSH</strong> - Secure Shell</li>
-              <li><strong>HMAC</strong> - Hash-Based Message Authentication Code</li>
-              <li><strong>SHA</strong> - Secure Hash Algorithm</li>
-            </ul>
-
-            <h3>Database & Storage</h3>
-            <ul>
-              <li><strong>OLTP</strong> - Online Transaction Processing</li>
-              <li><strong>OLAP</strong> - Online Analytical Processing</li>
-              <li><strong>TSDB</strong> - Time Series Database</li>
-              <li><strong>ORM</strong> - Object-Relational Mapping</li>
-              <li><strong>MVCC</strong> - Multi-Version Concurrency Control</li>
-              <li><strong>CQRS</strong> - Command and Query Responsibility Segregation</li>
-              <li><strong>GFS</strong> - Global File System</li>
-              <li><strong>HDFS</strong> - Hadoop Distributed File System</li>
-              <li><strong>RAID</strong> - Redundant Array of Independent Disks</li>
-            </ul>
-
-            <h3>Cloud & Infrastructure</h3>
-            <ul>
-              <li><strong>PaaS</strong> - Platform as a Service</li>
-              <li><strong>IaaS</strong> - Infrastructure as a Service</li>
-              <li><strong>SaaS</strong> - Software as a Service</li>
-              <li><strong>FaaS</strong> - Function as a Service</li>
-              <li><strong>BCP/DR</strong> - Business Continuity Plan/Disaster Recovery</li>
-              <li><strong>UTC</strong> - Coordinated Universal Time</li>
-            </ul>
-
-            <h3>Development & Standards</h3>
-            <ul>
-              <li><strong>JWT</strong> - JSON Web Token</li>
-              <li><strong>IDP</strong> - Identity Provider</li>
-              <li><strong>JSON</strong> - JavaScript Object Notation</li>
-              <li><strong>ISO</strong> - International Organization for Standardization</li>
-              <li><strong>UML</strong> - Unified Modeling Language</li>
-              <li><strong>RBAC</strong> - Role-Based Access Control</li>
-            </ul>
-
-            <h3>Security Threats</h3>
-            <ul>
-              <li><strong>CSRF</strong> - Cross-Site Request Forgery</li>
-              <li><strong>XSS</strong> - Cross-Site Scripting</li>
-              <li><strong>DDoS</strong> - Distributed Denial of Service</li>
-              <li><strong>SQLi</strong> - SQL Injection</li>
-            </ul>
-
-            <h3>Processing & Architecture</h3>
-            <ul>
-              <li><strong>SIMT</strong> - Single Instruction, Multiple Threads</li>
-              <li><strong>SIMD</strong> - Single Instruction, Multiple Data</li>
-              <li><strong>DAU</strong> - Daily Active Users</li>
-              <li><strong>ELK Stack</strong> - Elasticsearch, Logstash, and Kibana</li>
-            </ul>
-
-            <h3>Compliance & Regulations</h3>
-            <ul>
-              <li><strong>GDPR</strong> - General Data Protection Regulation</li>
-              <li><strong>PCI</strong> - Payment Card Industry</li>
-            </ul>
-          `
+          content: techAcronyms.content
         }
       ]
     },
@@ -688,30 +622,7 @@ export const appData = {
         {
           id: 'coming-soon',
           title: 'Coming Soon',
-          content: `
-            <h2>System Design High Level Design</h2>
-            <p>This section will contain comprehensive system design concepts and high-level design patterns.</p>
-            
-            <div class="info-note">
-              <strong>📚 External Resource:</strong>
-              <p>For now, you can access detailed system design content at:</p>
-              <a href="https://docs.google.com/document/d/1jVUeQGD_xFlnVPBEdSHrxka-CESJBe_xuV-IA-kKxOs/edit" target="_blank">
-                System Design HLD Google Doc
-              </a>
-            </div>
-
-            <h3>Topics to be covered:</h3>
-            <ul>
-              <li>Scalability Patterns</li>
-              <li>Database Design</li>
-              <li>Caching Strategies</li>
-              <li>Message Queues</li>
-              <li>API Design</li>
-              <li>System Architecture Patterns</li>
-              <li>Performance Optimization</li>
-              <li>Monitoring and Observability</li>
-            </ul>
-          `
+          content: systemDesignHLD.content
         }
       ]
     },
@@ -722,30 +633,7 @@ export const appData = {
         {
           id: 'low-level-design-coming-soon',
           title: 'Coming Soon',
-          content: `
-            <h2>System Design Low Level Design</h2>
-            <p>This section will contain comprehensive low-level design concepts and implementation patterns.</p>
-            
-            <div class="info-note">
-              <strong>📚 External Resource:</strong>
-              <p>For now, you can access detailed low-level design content at:</p>
-              <a href="https://docs.google.com/document/d/195UBBc7vSewe9BWUHLAvQFClR4HTLloozVhjdgZ54H8/edit" target="_blank">
-                System Design LLD Google Doc
-              </a>
-            </div>
-
-            <h3>Topics to be covered:</h3>
-            <ul>
-              <li>Object-Oriented Design Principles</li>
-              <li>Design Patterns</li>
-              <li>Code Architecture</li>
-              <li>Data Structures Implementation</li>
-              <li>Algorithm Design</li>
-              <li>Class Diagrams and UML</li>
-              <li>API Design Patterns</li>
-              <li>Testing Strategies</li>
-            </ul>
-          `
+          content: systemDesignLLD.content
         }
       ]
     },
@@ -756,41 +644,7 @@ export const appData = {
         {
           id: 'java-fundamentals',
           title: 'Java Fundamentals',
-          content: `
-            <h2>Java Quick Reference</h2>
-            <p>Essential Java concepts and syntax for technical interviews.</p>
-            
-            <h3>Core Java Concepts</h3>
-            <ul>
-              <li><strong>OOP Principles:</strong> Encapsulation, Inheritance, Polymorphism, Abstraction</li>
-              <li><strong>Collections Framework:</strong> List, Set, Map, Queue interfaces</li>
-              <li><strong>Exception Handling:</strong> try-catch, checked vs unchecked exceptions</li>
-              <li><strong>Multithreading:</strong> Thread, Runnable, ExecutorService</li>
-              <li><strong>Generics:</strong> Type safety and wildcards</li>
-              <li><strong>Lambda Expressions:</strong> Functional programming in Java 8+</li>
-              <li><strong>Streams API:</strong> Functional data processing</li>
-            </ul>
-
-            <h3>Common Data Structures</h3>
-            <ul>
-              <li><strong>ArrayList vs LinkedList:</strong> Performance characteristics</li>
-              <li><strong>HashMap vs TreeMap:</strong> Ordering and performance</li>
-              <li><strong>HashSet vs TreeSet:</strong> Uniqueness and sorting</li>
-              <li><strong>Stack and Queue:</strong> LIFO vs FIFO operations</li>
-            </ul>
-
-            <h3>Memory Management</h3>
-            <ul>
-              <li><strong>Heap vs Stack:</strong> Memory allocation</li>
-              <li><strong>Garbage Collection:</strong> Automatic memory management</li>
-              <li><strong>Memory Leaks:</strong> Common causes and prevention</li>
-            </ul>
-
-            <div class="info-note">
-              <strong>💡 Interview Tip:</strong>
-              <p>Focus on understanding the "why" behind Java features, not just the "how". Interviewers often ask about trade-offs and design decisions.</p>
-            </div>
-          `
+          content: javaQuickReference.content
         }
       ]
     },

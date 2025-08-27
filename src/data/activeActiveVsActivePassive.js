@@ -16,12 +16,21 @@ export const activeActiveVsActivePassive = {
       <li><strong>Symmetric design:</strong> All nodes have equal capabilities</li>
     </ul>
 
-    <details>
-      <summary><strong>Real-World Example: Netflix Global CDN</strong></summary>
-      <div class="info-note">
-        Netflix operates an active-active architecture across multiple AWS regions. When you stream a movie, content is served from the nearest active edge location. If the US-East region experiences issues, traffic seamlessly routes to US-West or other regions without interruption. All regions actively serve users simultaneously, providing 99.99% availability.
-      </div>
-    </details>
+    <h4>Active-Active Implementations</h4>
+    <ul>
+      <li><strong>Databases:</strong> Galera Cluster, Cassandra, CockroachDB</li>
+      <li><strong>Web Servers:</strong> Multiple Nginx/Apache behind load balancer</li>
+      <li><strong>Application Servers:</strong> Kubernetes pods with horizontal scaling</li>
+      <li><strong>Message Queues:</strong> RabbitMQ cluster, Apache Kafka</li>
+      <li><strong>Caching:</strong> Redis Cluster, Memcached distributed</li>
+      <li><strong>CDN:</strong> CloudFlare, AWS CloudFront edge locations</li>
+    </ul>
+
+    <h4>Real-World Example: Netflix Global CDN</h4>
+    <p>Netflix operates an active-active architecture across multiple AWS regions. When you stream a movie, content is served from the nearest active edge location. If the US-East region experiences issues, traffic seamlessly routes to US-West or other regions without interruption. All regions actively serve users simultaneously, providing 99.99% availability.</p>
+
+    <h4>Implementation Example: E-commerce Platform Active-Active Setup</h4>
+    <p>Amazon's e-commerce platform runs active-active across multiple availability zones. When you browse products, your requests are handled by any available server. If one zone goes down during Black Friday, the other zones continue serving millions of customers without interruption, maintaining 99.99% uptime during peak traffic.</p>
 
     <h4>Advantages</h4>
     <ul>
@@ -41,29 +50,6 @@ export const activeActiveVsActivePassive = {
       <li><strong>Higher operational cost:</strong> All nodes need full capacity</li>
     </ul>
 
-    <div class="code-block">
-      <div class="code-label">ARCHITECTURE</div>
-      <pre><code>// Active-Active Architecture
-┌─────────────┐     ┌─────────────┐     ┌─────────────┐
-│   Node A    │     │   Node B    │     │   Node C    │
-│  (Active)   │     │  (Active)   │     │  (Active)   │
-│  33% Load   │     │  33% Load   │     │  33% Load   │
-└──────┬──────┘     └──────┬──────┘     └──────┬──────┘
-       │                   │                   │
-       └───────────────────┴───────────────────┘
-                          │
-                   Load Balancer
-                          │
-                      Clients
-
-// Configuration Example (HAProxy)
-backend web_servers
-    balance roundrobin
-    server web1 192.168.1.10:80 check
-    server web2 192.168.1.11:80 check
-    server web3 192.168.1.12:80 check</code></pre>
-    </div>
-
     <h3>Active-Passive Configuration</h3>
     <p>In an active-passive configuration, one server (or a group of servers) is designated as active (hot), while the remaining servers are passive (cold) or standby. The passive nodes remain idle until a failover event occurs.</p>
     
@@ -76,12 +62,20 @@ backend web_servers
       <li><strong>Health monitoring:</strong> Constant checking of active node</li>
     </ul>
 
-    <details>
-      <summary><strong>Real-World Example: Traditional Banking Systems</strong></summary>
-      <div class="info-note">
-        Many banks use active-passive setups for their core banking systems. The primary data center in New York handles all transactions, while a disaster recovery site in Chicago remains on standby with replicated data. If the primary site fails, operations switch to Chicago within 15-30 minutes, ensuring critical financial data remains consistent and secure.
-      </div>
-    </details>
+    <h4>Active-Passive Implementations</h4>
+    <ul>
+      <li><strong>Databases:</strong> MySQL with replica, PostgreSQL streaming replication</li>
+      <li><strong>File Systems:</strong> DRBD (Distributed Replicated Block Device)</li>
+      <li><strong>Applications:</strong> Traditional HA clusters with Pacemaker</li>
+      <li><strong>Network Equipment:</strong> VRRP (Virtual Router Redundancy Protocol)</li>
+      <li><strong>Storage:</strong> SAN replication to DR site</li>
+    </ul>
+
+    <h4>Real-World Example: Traditional Banking Systems</h4>
+    <p>Many banks use active-passive setups for their core banking systems. The primary data center in New York handles all transactions, while a disaster recovery site in Chicago remains on standby with replicated data. If the primary site fails, operations switch to Chicago within 15-30 minutes, ensuring critical financial data remains consistent and secure.</p>
+
+    <h4>Implementation Example: Hospital Management System</h4>
+    <p>A hospital's patient management system uses active-passive configuration. The primary server handles all patient records, appointments, and billing. A secondary server in a different building maintains real-time copies. If the primary fails, the secondary takes over within 5 minutes, ensuring critical patient data remains accessible during emergencies.</p>
 
     <h4>Advantages</h4>
     <ul>
@@ -101,27 +95,11 @@ backend web_servers
       <li><strong>Scaling limitations:</strong> Can't distribute load</li>
     </ul>
 
-    <div class="code-block">
-      <div class="code-label">ARCHITECTURE</div>
-      <pre><code>// Active-Passive Architecture
-┌─────────────┐     ┌─────────────┐     ┌─────────────┐
-│   Node A    │     │   Node B    │     │   Node C    │
-│  (Active)   │     │  (Passive)  │     │  (Passive)  │
-│  100% Load  │     │   Standby   │     │   Standby   │
-└──────┬──────┘     └─────────────┘     └─────────────┘
-       │                   ↑                     ↑
-       │                   └──────Replication────┘
-       │
-   Load Balancer
-       │
-    Clients
-
-// Failover Process
-1. Active node fails
-2. Health check detects failure
-3. Passive node promoted to active
-4. DNS/Load balancer updated
-5. Traffic redirected to new active</code></pre>
+    <div class="image-container">
+      <img src="/images/Active-Active-vs-Active-Passive-Architecture.jpg" alt="Active-Active vs Active-Passive Architecture Comparison" class="content-image" />
+      <p class="image-caption">
+        <em>Source: <a href="https://www.geeksforgeeks.org/system-design/active-active-vs-active-passive-architecture/" target="_blank" rel="noopener noreferrer">GeeksforGeeks - Active-Active vs Active-Passive Architecture</a></em>
+      </p>
     </div>
 
     <h3>Detailed Comparison</h3>
@@ -180,41 +158,6 @@ backend web_servers
       </table>
     </div>
 
-    <h3>Implementation Examples</h3>
-    
-    <h4>Active-Active Implementations</h4>
-    <ul>
-      <li><strong>Databases:</strong> Galera Cluster, Cassandra, CockroachDB</li>
-      <li><strong>Web Servers:</strong> Multiple Nginx/Apache behind load balancer</li>
-      <li><strong>Application Servers:</strong> Kubernetes pods with horizontal scaling</li>
-      <li><strong>Message Queues:</strong> RabbitMQ cluster, Apache Kafka</li>
-      <li><strong>Caching:</strong> Redis Cluster, Memcached distributed</li>
-      <li><strong>CDN:</strong> CloudFlare, AWS CloudFront edge locations</li>
-    </ul>
-
-    <details>
-      <summary><strong>Example: E-commerce Platform Active-Active Setup</strong></summary>
-      <div class="info-note">
-        Amazon's e-commerce platform runs active-active across multiple availability zones. When you browse products, your requests are handled by any available server. If one zone goes down during Black Friday, the other zones continue serving millions of customers without interruption, maintaining 99.99% uptime during peak traffic.
-      </div>
-    </details>
-
-    <h4>Active-Passive Implementations</h4>
-    <ul>
-      <li><strong>Databases:</strong> MySQL with replica, PostgreSQL streaming replication</li>
-      <li><strong>File Systems:</strong> DRBD (Distributed Replicated Block Device)</li>
-      <li><strong>Applications:</strong> Traditional HA clusters with Pacemaker</li>
-      <li><strong>Network Equipment:</strong> VRRP (Virtual Router Redundancy Protocol)</li>
-      <li><strong>Storage:</strong> SAN replication to DR site</li>
-    </ul>
-
-    <details>
-      <summary><strong>Example: Hospital Management System</strong></summary>
-      <div class="info-note">
-        A hospital's patient management system uses active-passive configuration. The primary server handles all patient records, appointments, and billing. A secondary server in a different building maintains real-time copies. If the primary fails, the secondary takes over within 5 minutes, ensuring critical patient data remains accessible during emergencies.
-      </div>
-    </details>
-
     <h3>Hybrid Approaches</h3>
     
     <h4>Active-Active with Passive Backup</h4>
@@ -272,30 +215,10 @@ backend web_servers
       <li><strong>Budget constraints:</strong> Lower operational complexity costs</li>
     </ul>
 
-    <h3>Best Practices</h3>
-    
-    <h4>For Active-Active Systems</h4>
-    <ul>
-      <li><strong>Implement robust conflict resolution:</strong> Handle concurrent updates gracefully</li>
-      <li><strong>Use appropriate load balancing:</strong> Round-robin, least connections, or geographic</li>
-      <li><strong>Comprehensive health checks:</strong> Monitor application and infrastructure layers</li>
-      <li><strong>Consider data partitioning:</strong> Shard data to reduce conflicts</li>
-      <li><strong>Session management:</strong> Use distributed sessions or stateless design</li>
-      <li><strong>Circuit breakers:</strong> Prevent cascade failures between nodes</li>
-    </ul>
 
-    <h4>For Active-Passive Systems</h4>
-    <ul>
-      <li><strong>Regular failover testing:</strong> Practice disaster recovery procedures</li>
-      <li><strong>Monitor replication lag:</strong> Ensure data synchronization is current</li>
-      <li><strong>Automated failover logic:</strong> Implement carefully with proper safeguards</li>
-      <li><strong>Maintain clear runbooks:</strong> Document procedures for manual intervention</li>
-      <li><strong>Keep passive nodes updated:</strong> Regular patching and maintenance</li>
-      <li><strong>Network redundancy:</strong> Multiple paths between active and passive sites</li>
-    </ul>
 
     <div class="reference-links">
-      <h4>References</h4>
+      <h4>Further Reading and References</h4>
       <ul>
         <li><a href="https://aws.amazon.com/builders-library/static-stability-using-availability-zones/" target="_blank">AWS: Static Stability Using Availability Zones</a></li>
         <li><a href="https://netflixtechblog.com/active-active-for-multi-regional-resiliency-c47719f6685b" target="_blank">Netflix: Active-Active for Multi-Regional Resiliency</a></li>

@@ -55,8 +55,50 @@ export const loadBalancer = {
       <li><strong>Static Content-based:</strong> Routes based on content type or URL patterns</li>
     </ul>
 
+    <h3>Load Balancing vs Consistent Hashing</h3>
+    <p>While both load balancing and consistent hashing are used in distributed systems, they serve different purposes and operate at different levels:</p>
+    
+    <div class="comparison-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Aspect</th>
+            <th>Load Balancing</th>
+            <th>Consistent Hashing</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Primary Purpose</strong></td>
+            <td>Request distribution across replicas/nodes</td>
+            <td>Data partitioning and distribution across nodes</td>
+          </tr>
+          <tr>
+            <td><strong>Operation Level</strong></td>
+            <td>Request layer - determines which node handles specific requests</td>
+            <td>Data layer - determines which node stores specific data</td>
+          </tr>
+          <tr>
+            <td><strong>Key Function</strong></td>
+            <td>Decides which replica or node should handle a request among the replicas based on load balancing algorithms</td>
+            <td>Handles the distribution of data (data partitioning) across nodes and determines which node is responsible for each piece of data based on a consistent hashing scheme</td>
+          </tr>
+          <tr>
+            <td><strong>Consistency</strong></td>
+            <td>May not guarantee consistent routing for the same client</td>
+            <td>Minimizes data movement when nodes are added/removed</td>
+          </tr>
+          <tr>
+            <td><strong>Use Cases</strong></td>
+            <td>Web servers, application servers, API gateways</td>
+            <td>Distributed caches, databases, storage systems</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
     <div class="reference-links">
-      <h4>📚 References</h4>
+      <h4>Further Reading and References</h4>
       <ul>
         <li><a href="https://www.scaler.com/topics/aws/load-balancing/" target="_blank">Load Balancing - AWS</a></li>
         <li><a href="https://www.nginx.com/resources/glossary/load-balancing/" target="_blank">Load Balancing - Nginx</a></li>

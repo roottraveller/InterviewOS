@@ -15,13 +15,6 @@ export const apiGateway = {
       <li><strong>Circuit breaking:</strong> Prevent cascade failures in distributed systems</li>
     </ul>
 
-    <details>
-      <summary><strong>Example: E-commerce API Routing</strong></summary>
-      <div class="info-note">
-        When you browse an e-commerce site like Amazon, the API Gateway routes <code>/products/*</code> requests to the Product Service, <code>/users/*</code> to User Service, and <code>/orders/*</code> to Order Service. If the Product Service has 5 instances, the gateway automatically distributes load and routes around any unhealthy instances, ensuring 99.9% availability.
-      </div>
-    </details>
-
     <h4>Authentication & Authorization</h4>
     <ul>
       <li><strong>Centralized security:</strong> Single point for authentication logic</li>
@@ -29,13 +22,6 @@ export const apiGateway = {
       <li><strong>Role-based access:</strong> Control permissions at the gateway level</li>
       <li><strong>Security policies:</strong> Enforce consistent security across all APIs</li>
     </ul>
-
-    <details>
-      <summary><strong>Example: Banking API Security</strong></summary>
-      <div class="info-note">
-        A banking API Gateway validates JWT tokens for all requests. When you check your account balance via mobile app, the gateway verifies your authentication token, checks if you have permission to access account data, and only then forwards the request to the Account Service. This prevents unauthorized access and ensures consistent security across all banking operations.
-      </div>
-    </details>
 
     <h4>Rate Limiting & Throttling</h4>
     <ul>
@@ -101,36 +87,12 @@ Client → API Gateway → Authentication → Rate Limiting → Routing → Back
 
     <h4>Backend for Frontend (BFF)</h4>
     <p>Separate gateways optimized for different client types (mobile, web, IoT).</p>
-    <ul>
-      <li>Mobile BFF: Optimized for limited bandwidth and battery</li>
-      <li>Web BFF: Rich data sets for browser applications</li>
-      <li>Partner BFF: External API access with different security requirements</li>
-    </ul>
-
-    <details>
-      <summary><strong>Example: Netflix BFF Pattern</strong></summary>
-      <div class="info-note">
-        Netflix uses different API Gateways for their mobile apps versus web browsers. The mobile BFF returns compressed data optimized for small screens and limited bandwidth, while the web BFF provides richer metadata for the full browser experience. Each BFF aggregates data from multiple microservices to create client-specific responses.
-      </div>
-    </details>
 
     <h4>Microservices Gateway</h4>
     <p>Central entry point for microservices architecture with service discovery integration.</p>
-    <ul>
-      <li>Dynamic service registration and discovery</li>
-      <li>Automatic load balancing across service instances</li>
-      <li>Circuit breaker patterns for resilience</li>
-      <li>Distributed tracing and monitoring</li>
-    </ul>
 
     <h4>Legacy Modernization</h4>
     <p>Gradually modernize legacy systems by exposing them through modern APIs.</p>
-    <ul>
-      <li>Protocol translation from modern REST to legacy SOAP/RPC</li>
-      <li>Data format transformation</li>
-      <li>Security layer addition to legacy systems</li>
-      <li>Gradual migration path to microservices</li>
-    </ul>
 
     <h3>Popular API Gateway Solutions</h3>
 
@@ -184,126 +146,6 @@ Client → API Gateway → Authentication → Rate Limiting → Routing → Back
         </tbody>
       </table>
     </div>
-
-    <h3>Benefits & Advantages</h3>
-
-    <h4>For Development Teams</h4>
-    <ul>
-      <li><strong>Simplified client integration:</strong> Single endpoint for multiple services</li>
-      <li><strong>Cross-cutting concerns:</strong> Centralized implementation of common features</li>
-      <li><strong>Service abstraction:</strong> Hide backend complexity from clients</li>
-      <li><strong>Faster development:</strong> Reusable security and monitoring components</li>
-    </ul>
-
-    <h4>For Operations</h4>
-    <ul>
-      <li><strong>Centralized monitoring:</strong> Single point for observability</li>
-      <li><strong>Consistent security:</strong> Uniform security policies</li>
-      <li><strong>Traffic management:</strong> Control and shape API traffic</li>
-      <li><strong>Analytics:</strong> Unified API usage insights</li>
-    </ul>
-
-    <h4>For Business</h4>
-    <ul>
-      <li><strong>API monetization:</strong> Usage tracking and billing</li>
-      <li><strong>Partner integration:</strong> Controlled external API access</li>
-      <li><strong>Compliance:</strong> Centralized audit and logging</li>
-      <li><strong>Time to market:</strong> Faster API deployment</li>
-    </ul>
-
-    <h3>Challenges & Considerations</h3>
-
-    <h4>Technical Challenges</h4>
-    <ul>
-      <li><strong>Single point of failure:</strong> Gateway outage affects all services</li>
-      <li><strong>Performance bottleneck:</strong> Additional network hop and processing</li>
-      <li><strong>Latency overhead:</strong> Authentication and routing add latency</li>
-      <li><strong>Configuration complexity:</strong> Managing routing rules and policies</li>
-    </ul>
-
-    <h4>Operational Challenges</h4>
-    <ul>
-      <li><strong>High availability requirements:</strong> Must be highly resilient</li>
-      <li><strong>Scaling considerations:</strong> Gateway must scale with traffic</li>
-      <li><strong>Monitoring complexity:</strong> Need comprehensive observability</li>
-      <li><strong>Version management:</strong> Coordinating API and gateway versions</li>
-    </ul>
-
-    <details>
-      <summary><strong>Example: Handling Gateway Failures</strong></summary>
-      <div class="info-note">
-        Uber runs multiple API Gateway instances across different availability zones. When one gateway fails, traffic automatically routes to healthy instances within seconds. They also implement circuit breakers so that if a backend service fails, the gateway fails fast rather than timing out, preventing cascade failures across their entire platform.
-      </div>
-    </details>
-
-    <h3>Security Features</h3>
-
-    <h4>Authentication Methods</h4>
-    <ul>
-      <li><strong>API Keys:</strong> Simple token-based authentication</li>
-      <li><strong>OAuth 2.0/OpenID Connect:</strong> Industry-standard authorization</li>
-      <li><strong>JWT (JSON Web Tokens):</strong> Stateless token authentication</li>
-      <li><strong>mTLS:</strong> Mutual TLS for service-to-service communication</li>
-    </ul>
-
-    <h4>Security Policies</h4>
-    <ul>
-      <li><strong>IP whitelisting/blacklisting:</strong> Network-level access control</li>
-      <li><strong>CORS policies:</strong> Cross-origin resource sharing management</li>
-      <li><strong>Request validation:</strong> Schema validation and input sanitization</li>
-      <li><strong>DDoS protection:</strong> Rate limiting and traffic shaping</li>
-    </ul>
-
-    <div class="code-block">
-      <div class="code-label">SECURITY FLOW</div>
-      <pre><code>// API Gateway Security Flow
-1. Client Request → API Gateway
-2. Extract & Validate Token (JWT/API Key)
-3. Check Rate Limits & IP Whitelist
-4. Validate Request Schema
-5. Apply Security Headers
-6. Forward to Backend Service
-7. Transform & Return Response
-
-// Example JWT Validation
-{
-  "sub": "user123",
-  "aud": "api-gateway",
-  "iss": "auth-service",
-  "exp": 1640995200,
-  "iat": 1640991600,
-  "scope": "read:products write:orders"
-}</code></pre>
-    </div>
-
-    <h3>Best Practices</h3>
-
-    <h4>Design Principles</h4>
-    <ul>
-      <li><strong>Keep it lightweight:</strong> Minimize processing overhead</li>
-      <li><strong>Fail fast:</strong> Quick error responses, avoid timeouts</li>
-      <li><strong>Stateless design:</strong> Don't store session state in gateway</li>
-      <li><strong>Horizontal scaling:</strong> Design for multiple gateway instances</li>
-      <li><strong>Circuit breakers:</strong> Implement failure isolation patterns</li>
-    </ul>
-
-    <h4>Operational Excellence</h4>
-    <ul>
-      <li><strong>Comprehensive monitoring:</strong> Track all key metrics</li>
-      <li><strong>Automated deployment:</strong> CI/CD for gateway configurations</li>
-      <li><strong>Blue-green deployments:</strong> Zero-downtime updates</li>
-      <li><strong>Regular testing:</strong> Load testing and chaos engineering</li>
-      <li><strong>Documentation:</strong> Keep API documentation up to date</li>
-    </ul>
-
-    <h4>Performance Optimization</h4>
-    <ul>
-      <li><strong>Caching strategies:</strong> Cache frequently accessed data</li>
-      <li><strong>Connection pooling:</strong> Reuse backend connections</li>
-      <li><strong>Compression:</strong> Reduce payload sizes</li>
-      <li><strong>Async processing:</strong> Non-blocking request handling</li>
-      <li><strong>Geographic distribution:</strong> Deploy gateways closer to users</li>
-    </ul>
 
     <div class="reference-links">
       <h4>References</h4>
