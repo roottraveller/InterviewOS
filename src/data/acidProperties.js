@@ -5,43 +5,86 @@ export const acidProperties = {
     <p>ACID properties are a set of guarantees for database transactions to ensure data validity despite errors, power failures, and other mishaps. They are typically associated with traditional relational databases and emphasize strong consistency.</p>
 
     <h3>Atomicity</h3>
-    <p>Atomicity ensures that a transaction is treated as a single, indivisible unit. It either succeeds completely or fails completely. If any part of a transaction fails, the entire transaction is rolled back, and the database is left unchanged.</p>
-    <details>
-      <summary><strong>Example</strong></summary>
-      <div class="info-note">
-        A bank transfer from Account A to Account B. The transaction involves two operations: debiting A and crediting B. If the system crashes after debiting A but before crediting B, atomicity ensures the debit is rolled back, leaving the database in its original state.
+    <p>Atomicity ensures that a transaction either succeeds completely or fails completely. If any part of a transaction fails, the entire transaction is rolled back, and the database is left unchanged.</p>
+    
+    <div class="code-block">
+      <div class="code-header">
+        <span>Bank Transfer Transaction</span>
       </div>
-    </details>
+      <pre><code>-- Example: Bank Transfer Transaction
+BEGIN TRANSACTION;
+  UPDATE accounts SET balance = balance - 100 WHERE id = 'A';
+  UPDATE accounts SET balance = balance + 100 WHERE id = 'B';
+COMMIT;
+
+-- If any step fails, entire transaction is rolled back
+-- Database remains in original state</code></pre>
+    </div>
 
     <h3>Consistency</h3>
-    <p>Consistency ensures that a transaction brings the database from one valid state to another. It enforces all predefined rules, such as constraints, cascades, and triggers. Any transaction that violates the database's consistency rules will be aborted.</p>
-    <details>
-      <summary><strong>Example</strong></summary>
-      <div class="info-note">
-        In a banking application, a consistency rule might be that the sum of all account balances must remain constant. A transfer transaction must not alter this total sum. If it does, it violates consistency and is rolled back.
+    <p>Consistency ensures that the database remains in a valid state before and after the execution of a transaction. It ensures any transaction will bring the database from one valid state to another, and prevents the database from entering an invalid state.</p>
+    
+    <div class="code-block">
+      <div class="code-header">
+        <span>Consistency Check</span>
       </div>
-    </details>
+      <pre><code>-- Example: Consistency Check
+-- Constraint: Total balance must remain constant
+CREATE TABLE accounts (
+  id VARCHAR(10) PRIMARY KEY,
+  balance DECIMAL(10,2) CHECK (balance >= 0)
+);
+
+-- Transaction maintains consistency
+BEGIN TRANSACTION;
+  UPDATE accounts SET balance = balance - 50 WHERE id = 'A';
+  UPDATE accounts SET balance = balance + 50 WHERE id = 'B';
+  -- If total balance changes, transaction fails
+COMMIT;</code></pre>
+    </div>
 
     <h3>Isolation</h3>
-    <p>Isolation ensures that the concurrent execution of transactions results in a system state that would be obtained if transactions were executed serially. Each transaction is isolated from others, preventing them from interfering with one another.</p>
-    <details>
-      <summary><strong>Example</strong></summary>
-      <div class="info-note">
-        If one transaction is calculating the total balance of all accounts while another is transferring money, isolation ensures the calculation sees the state either before or after the transfer, but not an inconsistent state in between.
+    <p>Isolation ensures that the execution of multiple transactions concurrently does not interfere with each other.</p>
+    
+    <div class="code-block">
+      <div class="code-header">
+        <span>Transaction Isolation</span>
       </div>
-    </details>
+      <pre><code>-- Example: Transaction Isolation
+-- Transaction 1: Reading balance
+SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+BEGIN TRANSACTION;
+  SELECT balance FROM accounts WHERE id = 'A';
+  -- Sees consistent state, not affected by Transaction 2
+COMMIT;
+
+-- Transaction 2: Updating balance (concurrent)
+BEGIN TRANSACTION;
+  UPDATE accounts SET balance = balance + 100 WHERE id = 'A';
+COMMIT;</code></pre>
+    </div>
 
     <h3>Durability</h3>
-    <p>Durability ensures that once a transaction has been committed, it will remain so, even in the event of power loss, crashes, or errors. The changes are permanently stored, typically in non-volatile memory.</p>
-    <details>
-      <summary><strong>Example</strong></summary>
-      <div class="info-note">
-        Once you receive a confirmation for your ATM cash withdrawal, the change in your account balance is permanent. Even if the system fails immediately after, your new balance is guaranteed to persist.
+    <p>Durability ensures that once a transaction is committed, it's permanently stored in the database and should not be lost even in the event of system failures (e.g., power outage, or hardware failure).</p>
+    
+    <div class="code-block">
+      <div class="code-header">
+        <span>Durability Guarantee</span>
       </div>
-    </details>
+      <pre><code>-- Example: Transaction with durability guarantee
+BEGIN TRANSACTION;
+  UPDATE accounts SET balance = balance - 200 WHERE id = 'A';
+  -- Changes written to disk before commit
+  COMMIT;
+  -- Even if system crashes now, changes are permanent
 
-    <h3>ACID vs. BASE</h3>
+-- After system restart, balance change persists
+SELECT balance FROM accounts WHERE id = 'A';</code></pre>
+    </div>
+
+    <h3>ACID vs. BASE Comparison</h3>
     <p>While ACID is common in relational databases, many NoSQL databases follow the BASE philosophy, which prioritizes availability over strict consistency.</p>
+    
     <div class="comparison-table">
       <table>
         <thead>
@@ -81,11 +124,15 @@ export const acidProperties = {
       </table>
     </div>
 
+    <h3>C in ACID vs C in CAP</h3>
+    <p>While both ACID and CAP use "C" for Consistency, they refer to fundamentally different concepts that are often confused. <a href="https://stackoverflow.com/questions/4813282/why-is-c-in-cap-theorem-not-same-as-c-in-acid/4813479#4813479" target="_blank">Learn more about the differences here</a>.</p>
+
     <div class="reference-links">
-      <h4>References</h4>
+      <h4>Further Reading and References</h4>
       <ul>
         <li><a href="https://www.educative.io/answers/what-are-acid-properties-in-a-database" target="_blank">What are ACID Properties in a Database</a></li>
         <li><a href="https://www.scaler.com/topics/dbms/acid-properties-in-dbms/" target="_blank">ACID Properties in DBMS</a></li>
+        <li><a href="https://stackoverflow.com/questions/4813282/why-is-c-in-cap-theorem-not-same-as-c-in-acid/4813479#4813479" target="_blank">C in ACID vs C in CAP - Stack Overflow</a></li>
       </ul>
     </div>
   `

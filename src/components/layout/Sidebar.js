@@ -8,7 +8,7 @@ import {
 import './Sidebar.css';
 
 const topicIcons = {
-  'Must know Acronyms': (
+  'Technology Acronyms': (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
       <circle cx="12" cy="12" r="12" fill="white" stroke="currentColor" strokeWidth="1"/>
       <text x="12" y="16" textAnchor="middle" fontSize="7" fontWeight="bold" fill="currentColor">ACRO</text>
@@ -129,9 +129,9 @@ const Sidebar = ({
   onToggleCollapse,
 }) => {
   const handleTopicClick = (topic) => {
-    // If topic has only one subtopic, navigate directly to it
+    // If topic has only one subtopic, navigate directly to the topic
     if (topic.subtopics.length === 1) {
-      onSubtopicSelect(topic.subtopics[0].id, topic.id);
+      onTopicSelect(topic.id);
       return;
     }
     
